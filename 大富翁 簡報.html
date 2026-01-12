@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>安平時空旅盤 - 專案報告</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* A4 紙張設定 */
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        * {
+            box-sizing: border-box;
+            -webkit-print-color-adjust: exact;
+        }
+        body {
+            margin: 0;
+            background: #525659; /* 瀏覽器背景深色，區分紙張 */
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+        .page {
+            width: 210mm;
+            height: 297mm;
+            background: #FDFBF7; /* 米色紙質感 */
+            margin: 20px auto;
+            padding: 20mm;
+            position: relative;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* 裝飾線條 */
+        .page::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 15mm;
+            background: #2D6E7E; /* 安平藍 */
+        }
+        .page::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 5mm;
+            background: #C14A36; /* 安平紅 */
+        }
+
+        /* 標題樣式 */
+        h1 { font-family: 'Noto Serif TC', serif; color: #2D6E7E; }
+        h2 { font-family: 'Noto Serif TC', serif; color: #C14A36; border-bottom: 2px solid #E5E7EB; padding-bottom: 10px; margin-bottom: 20px; }
+        h3 { color: #1F2937; font-weight: 700; margin-bottom: 5px; }
+        
+        /* 圖片預留框樣式 */
+        .img-placeholder {
+            background-color: #F3F4F6;
+            border: 2px dashed #CBD5E1;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #94A3B8;
+            font-size: 14px;
+            position: relative;
+            overflow: hidden;
+        }
+        .img-placeholder i { font-size: 32px; margin-bottom: 10px; }
+        
+        /* 實際圖片樣式 (若您之後插入 img 標籤) */
+        .img-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 頁碼 */
+        .page-num {
+            position: absolute;
+            bottom: 10mm;
+            right: 10mm;
+            font-size: 12px;
+            color: #64748B;
+        }
+
+        /* 列印專用 */
+        @media print {
+            body { background: none; }
+            .page { margin: 0; box-shadow: none; page-break-after: always; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 第一頁：封面 -->
+    <div class="page" style="justify-content: center; text-align: center;">
+        <div style="margin-bottom: 40px;">
+            <div class="text-6xl text-amber-500 mb-4">🦁</div>
+            <h1 style="font-size: 48px; margin-bottom: 10px;">安平時空旅盤</h1>
+            <p style="font-size: 24px; color: #64748B; letter-spacing: 2px;">虛實整合的互動桌遊體驗</p>
+        </div>
+
+        <!-- 封面大圖預留位置 -->
+        <div class="img-placeholder" style="width: 100%; height: 350px; margin-bottom: 40px; border-color: #2D6E7E; background-color: #ecfeff;">
+            <i class="fa-solid fa-image"></i>
+            <p>【在此放入：棋盤與手機 App 合照】</p>
+            <p class="text-xs mt-2">建議拍攝玩家正在遊玩的情境，展示實體與數位的結合</p>
+        </div>
+
+        <div style="text-align: left; width: 100%; padding: 0 40px;">
+            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #ddd; padding: 10px 0;">
+                <span class="font-bold text-gray-600">專案類型</span>
+                <span>互動網頁 / 實體桌遊</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #ddd; padding: 10px 0;">
+                <span class="font-bold text-gray-600">開發技術</span>
+                <span>HTML5, JS, Tailwind CSS, Gemini AI</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #ddd; padding: 10px 0;">
+                <span class="font-bold text-gray-600">報告日期</span>
+                <span>2025 年 12 月 18 日</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 10px 0;">
+                <span class="font-bold text-gray-600">設計者</span>
+                <span>[您的姓名]</span>
+            </div>
+        </div>
+
+        <div class="page-num">01</div>
+    </div>
+
+    <!-- 第二頁：開發過程 -->
+    <div class="page">
+        <h2 class="text-3xl">01. 專案發想與製作過程</h2>
+        
+        <!-- 1. 問題與動機 -->
+        <div class="mb-8">
+            <h3><i class="fa-solid fa-lightbulb text-yellow-500 mr-2"></i>設計動機</h3>
+            <p class="text-gray-600 text-justify leading-relaxed">
+                傳統大富翁在遊玩時常面臨「計算資產繁瑣」、「無法紀錄進度」以及「缺乏深度導覽」的問題。本專案旨在透過數位科技解決這些痛點，保留實體棋盤的社交溫度，同時賦予遊戲現代化的便利性。
+            </p>
+        </div>
+
+        <!-- 2. 製作流程 (圖文並茂) -->
+        <div class="grid grid-cols-2 gap-6 mb-6">
+            <!-- 步驟一 -->
+            <div>
+                <div class="img-placeholder" style="height: 150px; mb-2;">
+                    <i class="fa-solid fa-pen-ruler"></i>
+                    <p>【照片：棋盤設計草圖或 SVG 檔】</p>
+                </div>
+                <h4 class="font-bold text-anping-blue mt-2">1. 實體棋盤設計</h4>
+                <p class="text-xs text-gray-500">繪製安平地圖，選定 20 個特色景點（如古堡、樹屋），並依據地理位置排序。</p>
+            </div>
+            <!-- 步驟二 -->
+            <div>
+                <div class="img-placeholder" style="height: 150px; mb-2;">
+                    <i class="fa-solid fa-code"></i>
+                    <p>【照片：程式碼開發畫面】</p>
+                </div>
+                <h4 class="font-bold text-anping-blue mt-2">2. 數位伴侶開發</h4>
+                <p class="text-xs text-gray-500">使用 HTML/JS 開發網頁 App，實作骰子、資產計算與 QR Code 存檔系統。</p>
+            </div>
+        </div>
+
+        <!-- 3. 資料整合 -->
+        <div class="flex gap-6 items-center bg-gray-50 p-4 rounded-xl border border-gray-200">
+            <div class="flex-1">
+                <h3><i class="fa-solid fa-database text-blue-500 mr-2"></i>在地化資料整合</h3>
+                <p class="text-sm text-gray-600 mb-2">為了讓遊戲更真實，我們實地考察（或蒐集資料）了安平的特色：</p>
+                <ul class="list-disc list-inside text-sm text-gray-600">
+                    <li><strong>美食：</strong>阿財牛肉湯、周氏蝦捲</li>
+                    <li><strong>古蹟：</strong>安平小砲台、億載金城</li>
+                    <li><strong>新地標：</strong>大魚的祝福</li>
+                </ul>
+            </div>
+            <div class="img-placeholder" style="width: 120px; height: 120px; flex-shrink: 0;">
+                <i class="fa-solid fa-camera"></i>
+                <p class="text-xs">【照片：景點實景】</p>
+            </div>
+        </div>
+
+        <div class="page-num">02</div>
+    </div>
+
+    <!-- 第三頁：遊戲玩法 -->
+    <div class="page">
+        <h2 class="text-3xl">02. 遊戲機制與玩法</h2>
+
+        <!-- 核心循環 -->
+        <div class="flex justify-between items-center mb-8 text-center">
+            <div class="flex-1">
+                <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center text-2xl mx-auto mb-2 text-red-500"><i class="fa-solid fa-dice"></i></div>
+                <span class="font-bold text-sm">1. 手機擲骰</span>
+            </div>
+            <i class="fa-solid fa-arrow-right text-gray-300"></i>
+            <div class="flex-1">
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-2xl mx-auto mb-2 text-blue-500"><i class="fa-solid fa-chess-pawn"></i></div>
+                <span class="font-bold text-sm">2. 移動棋子</span>
+            </div>
+            <i class="fa-solid fa-arrow-right text-gray-300"></i>
+            <div class="flex-1">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center text-2xl mx-auto mb-2 text-green-500"><i class="fa-solid fa-mobile-screen"></i></div>
+                <span class="font-bold text-sm">3. 觸發事件</span>
+            </div>
+        </div>
+
+        <!-- 雙重勝利條件 -->
+        <div class="grid grid-cols-2 gap-6 mb-8">
+            <div class="bg-yellow-50 p-4 rounded-xl border border-yellow-200">
+                <h3 class="text-yellow-700"><i class="fa-solid fa-coins mr-2"></i>商業大亨</h3>
+                <p class="text-sm text-gray-600 mb-2">目標：總資產達 $3000</p>
+                <p class="text-xs text-gray-500">透過觀察茶葉價格走勢圖，低買高賣賺取價差。</p>
+            </div>
+            <div class="bg-purple-50 p-4 rounded-xl border border-purple-200">
+                <h3 class="text-purple-700"><i class="fa-solid fa-crown mr-2"></i>文化守護者</h3>
+                <p class="text-sm text-gray-600 mb-2">目標：蒐集 3 把劍獅</p>
+                <p class="text-xs text-gray-500">在特定古蹟格（如樹屋、古堡）消耗體力進行深度探索。</p>
+            </div>
+        </div>
+
+        <!-- App 畫面展示 -->
+        <h3 class="mb-4">📱 App 介面展示</h3>
+        <div class="grid grid-cols-3 gap-4 h-64">
+            <div class="img-placeholder">
+                <p>【交易所畫面】</p>
+                <p class="text-xs">(顯示價格走勢)</p>
+            </div>
+            <div class="img-placeholder">
+                <p>【景點導覽】</p>
+                <p class="text-xs">(顯示大魚的祝福照片)</p>
+            </div>
+            <div class="img-placeholder">
+                <p>【獲勝畫面】</p>
+                <p class="text-xs">(顯示彩蛋代碼)</p>
+            </div>
+        </div>
+
+        <div class="page-num">03</div>
+    </div>
+
+    <!-- 第四頁：成果與展望 -->
+    <div class="page">
+        <h2 class="text-3xl">03. 專案成果與特色</h2>
+
+        <!-- 特色亮點 -->
+        <div class="space-y-6 mb-10">
+            <div class="flex gap-4">
+                <div class="w-12 h-12 bg-gray-800 text-white rounded-lg flex-shrink-0 flex items-center justify-center text-xl"><i class="fa-solid fa-robot"></i></div>
+                <div>
+                    <h3 class="text-lg">AI 智慧導遊導入</h3>
+                    <p class="text-sm text-gray-600">整合 Gemini AI，玩家點擊按鈕即可獲得該景點的隨機冷知識或歷史故事，讓每次遊玩都有新鮮感。</p>
+                </div>
+            </div>
+            <div class="flex gap-4">
+                <div class="w-12 h-12 bg-gray-800 text-white rounded-lg flex-shrink-0 flex items-center justify-center text-xl"><i class="fa-solid fa-qrcode"></i></div>
+                <div>
+                    <h3 class="text-lg">QR Code 存檔系統</h3>
+                    <p class="text-sm text-gray-600">解決實體桌遊無法存檔的痛點。將遊戲進度轉化為 QR Code，下次掃描即可恢復所有資產與位置。</p>
+                </div>
+            </div>
+            <div class="flex gap-4">
+                <div class="w-12 h-12 bg-gray-800 text-white rounded-lg flex-shrink-0 flex items-center justify-center text-xl"><i class="fa-solid fa-images"></i></div>
+                <div>
+                    <h3 class="text-lg">個人化圖庫整合</h3>
+                    <p class="text-sm text-gray-600">系統支援讀取本地照片，讓玩家可以將自己去安平旅遊的實拍照片放入遊戲中，打造專屬的回憶旅盤。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 最終成品展示 -->
+        <div class="flex-1 bg-gray-100 rounded-xl border-2 border-dashed border-gray-300 relative">
+            <div class="img-placeholder" style="width: 100%; height: 100%; background: transparent; border: none;">
+                <i class="fa-solid fa-camera-retro text-4xl mb-2"></i>
+                <p class="font-bold text-lg">【最終成品大合照】</p>
+                <p class="text-sm">在此放入：列印出的棋盤 + 手機 App 運作畫面 + 3D列印棋子(若有)</p>
+            </div>
+        </div>
+
+        <div class="mt-6 text-center text-sm text-gray-500">
+            <p>感謝您的閱讀</p>
+        </div>
+
+        <div class="page-num">04</div>
+    </div>
+
+</body>
+</html>
